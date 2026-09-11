@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Kabeera</title>
+  <meta name="description" content="An interactive, elegant, and modern digital birthday surprise website for Kabeera featuring photo memories, interactive cake, gift boxes, music soundtrack, timeline, and heartfelt letters." />
+  <meta property="og:title" content="Happy Birthday, Kabeera" />
+  <meta property="og:description" content="An interactive, elegant, and modern digital birthday surprise website for Kabeera featuring photo memories, interactive cake, gift boxes, music soundtrack, timeline, and heartfelt letters." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#fdf2f8" />
+
+  <!-- Google Fonts: Cormorant Garamond, Playfair Display, Caveat, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- =========================================================================
+       CANVAS FOR CONFETTI & PARTICLES
+       ========================================================================= -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- =========================================================================
+       1. WELCOME SCREEN (Opens as full screen curtain)
+       ========================================================================= -->
+  <div id="welcome-screen" class="welcome-screen">
+    <!-- Floating Background Decor -->
+    <div class="floating-bg-decor">
+      <div class="bg-balloon" style="left: 10%; animation-delay: 0s;">🎈</div>
+      <div class="bg-balloon" style="left: 30%; animation-delay: 5s;">🌸</div>
+      <div class="bg-balloon" style="left: 65%; animation-delay: 2s;">💖</div>
+      <div class="bg-balloon" style="left: 85%; animation-delay: 7s;">🎈</div>
+      <div class="bg-heart" style="top: 20%; left: 15%;">✨</div>
+      <div class="bg-heart" style="top: 70%; right: 18%;">💕</div>
+      <div class="bg-heart" style="top: 35%; right: 12%;">🌷</div>
+    </div>
+
+    <div class="welcome-content">
+      <div class="welcome-badge">✨ A Special Celebration Just For You</div>
+      <h1 class="welcome-title">
+        Hey <span class="cfg-friend-name">kabeera</span> love of my life 💕
+      </h1>
+      <p class="welcome-subtitle">I made something special for you.</p>
+      <button id="open-surprise-btn" class="btn-primary welcome-btn">
+        Open Your Surprise 🎁
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       16. NAVIGATION BAR (Appears smoothly after welcome screen)
+       ========================================================================= -->
+  <nav id="site-nav" class="site-nav">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-brand">
+        For <span>Kabeera</span> 💕
+      </a>
+
+      <div style="display:flex; align-items:center; gap: 16px;">
+        <button id="nav-music-toggle" class="nav-music-toggle" title="Play / Pause Soundtrack">
+          <span class="music-icon">🎵</span>
+          <span id="nav-music-text">Soundtrack</span>
+        </button>
+
+        <button id="nav-toggle" class="nav-toggle-btn" aria-label="Toggle navigation">
+          ☰
+        </button>
+      </div>
+
+      <ul id="nav-links" class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#countdown" class="nav-link">Countdown</a></li>
+        <li><a href="#gallery" class="nav-link">Memories</a></li>
+        <li><a href="#timeline" class="nav-link">Our Story</a></li>
+        <li><a href="#letter" class="nav-link">Letter</a></li>
+        <li><a href="#soundtrack" class="nav-link">Music</a></li>
+        <li><a href="#gifts" class="nav-link">Gifts</a></li>
+        <li><a href="#cake" class="nav-link">Make a Wish</a></li>
+        <li><a href="#wishes" class="nav-link">Wishes</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- =========================================================================
+       2. HERO / BIRTHDAY SECTION
+       ========================================================================= -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-greeting-badge">
+            <span>🎂</span> It's Your Special Day
+          </div>
+          <h1 class="hero-title">
+            Happy Birthday, <br />
+            <span class="name-highlight cfg-friend-name">kabeera! 🎂</span>
+          </h1>
+          <p class="hero-tagline">
+            Today is all about celebrating YOU.
+          </p>
+
+          <!-- Customizable Age & Date Pills -->
+          <div class="hero-meta-row">
+            <div class="meta-pill">
+              <span class="pill-icon">✨</span>
+              <span id="cfg-age">The Big 18</span>
+            </div>
+            <div class="meta-pill">
+              <span class="pill-icon">🗓️</span>
+              <span id="cfg-birthday-date">September 12, 2026</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#cake" class="btn-primary">
+              Blow Out Candles 🎂
+            </a>
+            <a href="#letter" class="btn-secondary">
+              Read My Letter 💌
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Favorite Photo Frame -->
+        <div class="hero-visual-card">
+          <div class="floating-sparkle sparkle-1">✨</div>
+          <div class="floating-sparkle sparkle-2">💖</div>
+          <div class="floating-sparkle sparkle-3">🌸</div>
+
+          <div class="photo-frame-wrapper">
+            <div class="photo-sticker-top">My Favorite Person 💕</div>
+            
+            <!-- =============================================================
+                 CUSTOMIZE: REPLACE THIS IMAGE WITH HER FAVORITE PHOTO
+                 ============================================================= -->
+            <img 
+              id="hero-favorite-photo"
+              class="hero-favorite-photo" 
+              src="/src/assets/images/regenerated_image_1789157890850.jpg" 
+              alt="Kabeera's Favorite Photo" 
+            />
+
+            <div class="photo-badge-bottom">
+              <span>🌸</span> Celebrating Kabeera
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <div class="mouse-pill">
+        <div class="mouse-wheel"></div>
+      </div>
+      <span>Scroll for memories</span>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. BIRTHDAY COUNTDOWN SECTION
+       ========================================================================= -->
+  <section id="countdown" class="countdown-section">
+    <div class="container container-narrow">
+      <div class="countdown-box">
+        <span class="section-tag">⏳ The Big Moment</span>
+        <h2 class="section-title">Counting Down To Your Day</h2>
+        <p class="section-subtitle">Every second brings us closer to celebrating another glorious year of your life.</p>
+
+        <!-- Live Countdown Grid -->
+        <div id="countdown-grid" class="countdown-grid">
+          <div class="countdown-item">
+            <div id="count-days" class="countdown-num">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div id="count-hours" class="countdown-num">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div id="count-mins" class="countdown-num">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-item">
+            <div id="count-secs" class="countdown-num">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <!-- Celebration Banner shown when countdown hits zero / is today -->
+        <div id="its-your-day-banner" class="its-your-day-banner">
+          🎉 IT'S YOUR DAY! 🎉<br />
+          <span style="font-size: 1.25rem; font-family: var(--font-body); font-weight: 500; color: var(--text-muted);">
+            Happy Birthday, Kabeera! Let the celebrations begin! 🥳
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. PHOTO GALLERY SECTION
+       ========================================================================= -->
+  <section id="gallery" class="gallery-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📸 Precious Moments</span>
+        <h2 class="section-title">Our Memory Vault</h2>
+        <p class="section-subtitle">
+          A collection of small snapshots that hold the biggest pieces of my heart. Click any photo to enlarge.
+        </p>
+      </div>
+
+      <!-- Gallery Grid populated dynamically by script.js with CONFIG.PHOTO_URLS -->
+      <div id="gallery-grid" class="gallery-grid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal for Photo Gallery -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close" aria-label="Close Lightbox">✕</button>
+      <button id="lightbox-prev" class="lightbox-prev" aria-label="Previous Photo">❮</button>
+      <button id="lightbox-next" class="lightbox-next" aria-label="Next Photo">❯</button>
+
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Memory Enlarged" />
+      </div>
+      <h3 id="lightbox-caption" class="lightbox-caption"></h3>
+      <div id="lightbox-counter" class="lightbox-counter"></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. TIMELINE / OUR STORY
+       ========================================================================= -->
+  <section id="timeline" class="timeline-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">📖 Chapters of Us</span>
+        <h2 class="section-title">Our Friendship Timeline</h2>
+        <p class="section-subtitle">
+          How random paths turned into the most cherished friendship of my lifetime.
+        </p>
+      </div>
+
+      <!-- Timeline Items populated dynamically from CONFIG.TIMELINE_ITEMS -->
+      <div id="timeline-container" class="timeline-wrapper">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. PERSONAL BIRTHDAY LETTER
+       ========================================================================= -->
+  <section id="letter" class="letter-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">💌 From The Heart</span>
+        <h2 class="section-title">A Little Something From Me To You</h2>
+        <p class="section-subtitle">
+          Some words are meant to be kept forever.
+        </p>
+      </div>
+
+      <div class="letter-outer-card">
+        <div class="letter-wax-seal">💌</div>
+
+        <div class="letter-header">
+          <h3 class="letter-salutation">My Dearest <span class="cfg-friend-name">Kabeera</span>,</h3>
+          <p class="letter-date">Written with all my love on your birthday</p>
+        </div>
+
+        <div id="letter-body" class="letter-body">
+          <p>
+            Happy Birthday to the most extraordinary person I know. 
+          </p>
+          <br />
+          <p>
+            When I look back on everything we've shared, I am constantly reminded of how incredibly blessed I am to have you in my life. You have this rare, magical way of making even the ordinary days feel unforgettable. Your laugh is medicine, your presence is comfort, and your heart is pure gold.
+          </p>
+          <br />
+          <p>
+            Through all the late-night talks, the crazy plans that turned into core memories, and the quiet moments where no words were needed, you have remained my anchor and my favorite confidante. You inspire me with your gentle strength, your fierce loyalty, and the boundless love you give to those around you.
+          </p>
+          <br />
+          <p>
+            On this special day, I hope you see yourself through the eyes of everyone who adores you. I hope you realize that the world is undeniably brighter, warmer, and sweeter simply because you exist in it. 
+          </p>
+          <br />
+          <p>
+            May this new year of your life bring you peace in abundance, dreams realized beyond your highest expectations, and joy that overflows in every room you enter. I promise to always be here cheering you on, celebrating your wins, and holding your hand through every chapter.
+          </p>
+          <br />
+          <p>
+            Thank you for being you. Today, tomorrow, and for all the years ahead.
+          </p>
+
+          <div class="letter-signature">
+            <span>With all my love forever,</span>
+            <p>Your Biggest Cheerleader 💕</p>
+          </div>
+        </div>
+
+        <div class="letter-fade-overlay"></div>
+
+        <div class="letter-toggle-wrapper">
+          <button id="read-letter-btn" class="btn-primary">
+            Read My Letter 💌
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. THINGS I LOVE ABOUT YOU
+       ========================================================================= -->
+  <section id="love" class="love-cards-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🌷 Why You're Special</span>
+        <h2 class="section-title">Things I Love About You</h2>
+        <p class="section-subtitle">
+          Just a few of the thousands of reasons why you mean the world to me. Hover or tap each card to reveal!
+        </p>
+      </div>
+
+      <!-- Populated dynamically from CONFIG.LOVE_ITEMS -->
+      <div id="love-cards-grid" class="love-cards-grid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       9. MUSIC SECTION ("Our Soundtrack")
+       ========================================================================= -->
+  <section id="soundtrack" class="music-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🎵 Melodies of Us</span>
+        <h2 class="section-title">Our Soundtrack</h2>
+        <p class="section-subtitle">
+          Songs that instantly take me back to a memory with you. Hit play to listen to our dreamy acoustic theme!
+        </p>
+      </div>
+
+      <div class="music-player-container">
+        <!-- Real HTML5 Audio Element -->
+        <audio id="soundtrack-audio-player" preload="metadata"></audio>
+
+        <div class="player-main-row">
+          <!-- Animated Vinyl Record -->
+          <div class="vinyl-disc-wrapper">
+            <div id="vinyl-disc" class="vinyl-disc">
+              <div class="vinyl-center-label">🎵</div>
+            </div>
+          </div>
+
+          <!-- Song Info -->
+          <div class="player-info">
+            <div class="now-playing-tag-row">
+              <div class="now-playing-tag">Now Playing</div>
+              <div id="audio-status-pill" class="audio-status-pill">
+                <span class="audio-pulse-dot"></span>
+                <span id="audio-status-text">Studio Audio Ready</span>
+              </div>
+            </div>
+            <h3 id="active-song-title" class="active-song-title">Say You Won't Let Go</h3>
+            <p id="active-song-artist" class="active-song-artist">James Arthur</p>
+            <div id="active-song-reason" class="active-song-reason">
+              “I knew I loved you then... Forever one of our most special songs.”
+            </div>
+          </div>
+        </div>
+
+        <!-- Player Controls -->
+        <div class="player-controls-row">
+          <div class="progress-bar-wrapper">
+            <span id="audio-current-time" class="time-stamp">0:00</span>
+            <div id="audio-progress-bar" class="audio-progress-bar" role="slider" aria-label="Seek track position" tabindex="0">
+              <div id="audio-progress-fill" class="audio-progress-fill"></div>
+            </div>
+            <span id="audio-duration-time" class="time-stamp">0:30</span>
+          </div>
+
+          <div class="player-controls-toolbar">
+            <div class="player-buttons">
+              <button id="player-prev-btn" class="control-btn" aria-label="Previous Song">⏮</button>
+              <button id="player-play-btn" class="control-btn play-pause-btn" aria-label="Play or Pause">▶</button>
+              <button id="player-next-btn" class="control-btn" aria-label="Next Song">⏭</button>
+            </div>
+
+            <div class="player-secondary-controls">
+              <button id="player-mute-btn" class="secondary-icon-btn" aria-label="Mute or Unmute" title="Mute / Unmute">🔊</button>
+              <a id="player-youtube-link" class="track-ext-btn" href="https://www.youtube.com/results?search_query=Say+You+Won't+Let+Go+James+Arthur" target="_blank" rel="noopener noreferrer" title="Listen to full track on YouTube">
+                <span>Full on YouTube ↗</span>
+              </a>
+              <label class="custom-audio-uploader" title="Play an audio file from your device">
+                <input type="file" id="custom-audio-input" accept="audio/*" style="display:none;" />
+                <span>📁 Custom Audio</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playlist -->
+        <div class="playlist-header">
+          <h4 class="playlist-heading">Tracks Curated for Kabeera</h4>
+          <span class="playlist-count">4 Songs • High Quality Audio</span>
+        </div>
+        <div id="playlist-items" class="playlist-items">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       10. VIDEO MEMORY SECTION
+       ========================================================================= -->
+  <section id="video" class="video-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🎥 Moving Pictures</span>
+        <h2 class="section-title">Press Play</h2>
+        <p class="section-subtitle">
+          A special video tribute dedicated to our laughter, travels, and sweetest moments together.
+        </p>
+      </div>
+
+      <div class="video-container-card">
+        <div id="video-player-frame" class="video-player-frame">
+          <!-- Poster Image extracted from uploaded video reel -->
+          <img 
+            id="video-poster-img"
+            class="video-poster-img" 
+            src="/src/assets/images/video_poster.jpg" 
+            alt="Video Memory Reel" 
+          />
+          <div class="video-overlay-tint"></div>
+
+          <!-- Interactive Play Button -->
+          <button id="video-play-btn" class="video-play-pulse-btn" aria-label="Play Video Memory">
+            ▶
+          </button>
+
+          <!-- Native video player -->
+          <video id="video-active-player" class="video-active-player" controls preload="metadata" poster="/src/assets/images/video_poster.jpg">
+            <source src="/src/assets/images/regenerated_image_1789160706486.mp4" type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
+        </div>
+
+        <div class="video-caption-bar">
+          <p>“Here’s to the moments that turned into lifelong memories.” 🎬</p>
+          <small>Captured with love for Kabeera’s special day 💖</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       12. INTERACTIVE GIFT BOXES
+       ========================================================================= -->
+  <section id="gifts" class="gifts-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🎁 Surprise Unboxing</span>
+        <h2 class="section-title">I Have A Few Gifts For You</h2>
+        <p class="section-subtitle">
+          Tap each gift box to untie the ribbon and reveal what's tucked inside!
+        </p>
+      </div>
+
+      <!-- Gift boxes rendered dynamically by JavaScript -->
+      <div id="gifts-grid" class="gifts-grid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Gift Reveal Modal -->
+  <div id="gift-modal" class="gift-modal" role="dialog" aria-modal="true" aria-label="Gift Surprise">
+    <div class="gift-modal-card">
+      <button id="gift-modal-close" class="gift-modal-close" aria-label="Close gift modal">✕</button>
+      <div id="gift-modal-icon" class="gift-modal-badge">🎁</div>
+      <h3 id="gift-modal-title" class="gift-modal-title">Special Gift</h3>
+      <p id="gift-modal-text" class="gift-modal-text">Content</p>
+      <button class="btn-primary" onclick="document.getElementById('gift-modal').classList.remove('active')">
+        Aww, Thank You! 💕
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       13. BIRTHDAY CAKE INTERACTION
+       ========================================================================= -->
+  <section id="cake" class="cake-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">🎂 Birthday Ritual</span>
+        <h2 class="section-title">Make A Wish</h2>
+        <p class="section-subtitle">
+          Close your eyes, think of your biggest dream, and blow out your birthday candles!
+        </p>
+      </div>
+
+      <div class="cake-stage-card">
+        <p class="cake-instructions">
+          Tap each <strong>candle flame</strong> to blow it out, or click the button below!
+        </p>
+
+        <!-- Interactive Birthday Cake -->
+        <div class="cake-wrapper">
+          <!-- 5 Candles on the top tier -->
+          <div class="candles-row">
+            <div class="candle" id="candle-1">
+              <div class="candle-flame"></div>
+              <div class="candle-smoke"></div>
+            </div>
+            <div class="candle" id="candle-2">
+              <div class="candle-flame"></div>
+              <div class="candle-smoke"></div>
+            </div>
+            <div class="candle" id="candle-3">
+              <div class="candle-flame"></div>
+              <div class="candle-smoke"></div>
+            </div>
+            <div class="candle" id="candle-4">
+              <div class="candle-flame"></div>
+              <div class="candle-smoke"></div>
+            </div>
+            <div class="candle" id="candle-5">
+              <div class="candle-flame"></div>
+              <div class="candle-smoke"></div>
+            </div>
+          </div>
+
+          <!-- Layered Birthday Cake Illustration -->
+          <div class="cake-graphic">
+            <div class="cake-layer-top">
+              <div class="cake-frosting-drips"></div>
+            </div>
+            <div class="cake-layer-middle"></div>
+            <div class="cake-layer-bottom"></div>
+            <div class="cake-plate"></div>
+          </div>
+        </div>
+
+        <button id="blow-candles-btn" class="btn-primary">
+          Blow Out All Candles 💨🎂
+        </button>
+
+        <!-- Banner revealed when all candles are blown -->
+        <div id="cake-wish-banner" class="cake-wish-banner">
+          ✨ Wish Made! ✨<br />
+          <span style="font-size: 1.15rem; color: var(--text-muted); font-family: var(--font-body); font-weight: 500;">
+            May every single desire of your heart bloom into reality this year, Kabeera!
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       14. THIS YEAR'S WISHES
+       ========================================================================= -->
+  <section id="wishes" class="wishes-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">✨ Blessings Ahead</span>
+        <h2 class="section-title">My Wishes For You</h2>
+        <p class="section-subtitle">
+          Everything I hope this next chapter brings directly into your life.
+        </p>
+      </div>
+
+      <!-- Populated dynamically from CONFIG.WISHES -->
+      <div id="wishes-grid" class="wishes-grid">
+        <!-- Rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       15. FINAL SURPRISE SECTION
+       ========================================================================= -->
+  <section id="final" class="final-surprise-section">
+    <div class="container">
+      <div class="final-card">
+        <span class="section-tag">👀 One Last Thing</span>
+        <h2 class="final-lead-title">Wait... One More Thing</h2>
+        <p class="final-lead-desc">
+          Before you go back to celebrating, there's one final envelope waiting just for you.
+        </p>
+        <button id="open-final-surprise-btn" class="btn-primary" style="font-size: 1.25rem; padding: 18px 46px;">
+          Open It 💌
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Heartfelt Reveal Modal -->
+  <div id="final-reveal-modal" class="final-reveal-modal" role="dialog" aria-modal="true" aria-label="Final Birthday Message">
+    <div class="final-modal-box">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;">👑🎂✨</div>
+      <h3 class="final-modal-name">Happy Birthday, <span class="cfg-friend-name">Kabeera</span>. ❤️</h3>
+
+      <div class="final-modal-message">
+I hope you always remember how loved, special, and important you are.
+
+Thank you for being part of my life.
+
+Here's to another year of laughter, memories, growth, happiness, and everything beautiful.
+
+I love you so much. 🥹❤️
+
+Happy Birthday! 🎂🎉
+      </div>
+
+      <button id="final-modal-close-btn" class="btn-primary" style="margin-top: 10px;">
+        Close With Love 💕
+      </button>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SITE FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">
+        Crafted with <span class="footer-heart">❤️</span> for <strong class="cfg-friend-name">Kabeera</strong> on her special day.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Happy Birthday, Kabeera",
+  "description": "An interactive, elegant, and modern digital birthday surprise website for Kabeera featuring photo memories, interactive cake, gift boxes, music soundtrack, timeline, and heartfelt letters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
